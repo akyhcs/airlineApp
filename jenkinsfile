@@ -1,0 +1,35 @@
+node {
+
+stage('GitCheckOut') {
+git branch: 'master', url: 'https://github.com/akyhcs/airlineApp.git'
+}
+
+def project_path = "airline"
+echo "Current workspace is $project_path"
+
+
+dir(project_path){
+
+    stage('Maven Clean') {
+        sh 'mvn clean'
+    }
+
+    stage('Maven Compile') {
+        sh 'mvn compile'
+    }
+
+
+
+    stage('Maven pkg') {
+        sh 'mvn package'
+    }
+    stage('Archive Artifacts') {
+        archive 'target/*.war'    
+    }
+}
+
+stage('Tomcat Deployment'){
+ deploy adapters: [tomcat8(credentialsId: 'tomcat01', path: '', url: 'http://172.18.0.3:8081/')], contextPath: '/airline', onFailure: false, war: 'airline/target/*.war'
+}
+ 
+}
