@@ -18,6 +18,12 @@ dir(project_path){
         sh 'mvn compile'
     }
 
+stage('Sonar Analysis'){
+ withSonarQubeEnv('sonar') 
+ { 
+	sh 'mvn sonar:sonar'
+ }
+}
 
 
     stage('Maven pkg') {
@@ -28,8 +34,8 @@ dir(project_path){
     }
 }
 
-stage('Tomcat Deployment'){
- deploy adapters: [tomcat8(credentialsId: 'tomcat01', path: '', url: 'http://172.18.0.3:8081/')], contextPath: '/airline', onFailure: false, war: 'airline/target/*.war'
-}
+//stage('Tomcat Deployment'){
+ //deploy adapters: [tomcat8(credentialsId: 'tomcat01', path: '', url: 'http://172.18.0.3:8081/')], contextPath: '/airline', onFailure: false, war: 'airline/target/*.war'
+//}
  
 }
