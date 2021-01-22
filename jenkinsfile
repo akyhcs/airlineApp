@@ -17,6 +17,9 @@ dir(project_path){
     stage('Maven Compile') {
         sh 'mvn compile'
     }
+    stage('Maven Test') {
+        sh 'mvn test'
+    }
 
 stage('Sonar Analysis'){
  withSonarQubeEnv('sonar') 
