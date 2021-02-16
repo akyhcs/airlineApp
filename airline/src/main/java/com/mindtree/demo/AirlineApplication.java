@@ -11,7 +11,7 @@ public class AirlineApplication {
 	private Environment env;
 
 	public static void main(String[] args) {
-	        System.out.println(env.getProperty("mysql_service"));
+	        System.out.println(env.getProperty("mysql_service")+"==============================================");
 		SpringApplication.run(AirlineApplication.class, args);
 	}
 
