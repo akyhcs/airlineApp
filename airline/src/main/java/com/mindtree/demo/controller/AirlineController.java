@@ -31,7 +31,7 @@ private Environment env;
 
 @GetMapping("/")
 public String getMethodName() {
-	return "<h1>env.getProperty("mysql_service")</h1>";
+	return "<h1>"+env.getProperty("mysql_service")+"</h1>";
 }
 @PostMapping("/sheet-excel")
 public ResponseEntity<ResponseDTO> read(@RequestParam("file") MultipartFile multipartFile)
